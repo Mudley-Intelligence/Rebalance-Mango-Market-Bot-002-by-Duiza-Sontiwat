@@ -6,10 +6,12 @@ Thanks to Duiza Sontiwat for sharing.
 
 
 ## Installation
-1. install python 
+1. install cPython or Anaconda 
 2. install mango-explorer and other library  
 https://pypi.org/project/mango-explorer/
-
+3. For Spot Trading
+We need to use the account that we run the bot, login to open the limit order of the spot that we want to trade at the Mango Market website for 1 order.
+In order for Mango Market to create an account for trading that spot in Mango Market system.
 
 
 ## Python file config
