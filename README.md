@@ -32,5 +32,5 @@ You can use this code https://github.com/Mudley-Intelligence/solana-mnemonic-to-
 context = mango.ContextBuilder.build(cluster_name="devnet")
 
 ## Run bot
-1. create folder name logs in your trading bot folder manualy
+1. create folder name 'logs' in your trading bot folder manualy.
 2. run bot (for example: python botmango_rb_spot.py)
