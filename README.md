@@ -1,5 +1,6 @@
 # Rebalance-Mango-Market-Bot-by-Duiza-Sontiwat
-Rebalance Mango Market Bot by Duiza Sontiwat for run trading bot in Solana Mango Market Defi 
+Rebalance Mango Market Bot by Duiza Sontiwat for run trading bot in Solana Mango Market Defi. 
+
 Thanks to Duiza Sontiwat for sharing. 
 
 ## Readme file Created by Mudley Inteligence
