@@ -9,28 +9,29 @@ import traceback
 
 
 # Config
-SYMBOL = 'SRM/USDC'#SPOT
-BALANCE_SYMBOL = 'SRM'
-DECIMAL_SYMBOL = 2
-K = 3 # % Rebalance Fix Asset value
-STARTPORT = 500 #Start capital (USD value)
-line_token = '' #Alert to line
-bot_name = 'Bot_Mango_Spot'
+SYMBOL 		= 'SRM/USDC'#SPOT
+BALANCE_SYMBOL 	= 'SRM'
+DECIMAL_SYMBOL 	= 2
+K 		= 3 # % Rebalance Fix Asset value
+STARTPORT 	= 500 #Start capital (USD value)
+line_token 	= '' #Alert to line
+bot_name 	= 'Bot_Mango_Spot'
+time_sleep	= 5*60 # 5 min for solana portBalance delay 
 
 #Key
-key = bytes(bytearray([67,218,68,118,140,171,228,222,8,29,48,61,255,114,49,226,239,89,151,110,29,136,149,118,97,189,163,8,23,88,246,35,187,241,107,226,47,155,40,162,3,222,98,203,176,230,34,49,45,8,253,77,136,241,34,4,80,227,234,174,103,11,124,146]))
-wallet = mango.Wallet(key)
+key 		= bytes(bytearray([67,218,68,118,140,171,228,222,8,29,48,61,255,114,49,226,239,89,151,110,29,136,149,118,97,189,163,8,23,88,246,35,187,241,107,226,47,155,40,162,3,222,98,203,176,230,34,49,45,8,253,77,136,241,34,4,80,227,234,174,103,11,124,146]))
+wallet 		= mango.Wallet(key)
 
-context = mango.ContextBuilder.build(cluster_name="devnet")
+context 	= mango.ContextBuilder.build(cluster_name="devnet")
 
 #Market Symbol
-stub = context.market_lookup.find_by_symbol(SYMBOL)
-market = mango.ensure_market_loaded(context, stub)
+stub 		= context.market_lookup.find_by_symbol(SYMBOL)
+market 		= mango.ensure_market_loaded(context, stub)
 
 # Get all the Wallet's accounts for that Group
-group = mango.Group.load(context)
-accounts = mango.Account.load_all_for_owner(context, wallet.address, group)
-account = accounts[0]
+group 		= mango.Group.load(context)
+accounts 	= mango.Account.load_all_for_owner(context, wallet.address, group)
+account 	= accounts[0]
 
 market_operations = mango.create_market_operations(context, wallet, account, market, dry_run=False)
 
@@ -42,9 +43,9 @@ def log(data):
 
 def lineNotify(msg):
   if(line_token != ''):
-    url = 'https://notify-api.line.me/api/notify'
-    headers = {'content-type':'application/x-www-form-urlencoded','Authorization':'Bearer '+line_token}
-    r = requests.post(url, headers=headers, data = {'message':"==="+bot_name+"===\n"+msg})
+    url 	= 'https://notify-api.line.me/api/notify'
+    headers 	= {'content-type':'application/x-www-form-urlencoded','Authorization':'Bearer '+line_token}
+    r 		= requests.post(url, headers=headers, data = {'message':"==="+bot_name+"===\n"+msg})
 
 
 
@@ -52,8 +53,8 @@ percentAssetChange = 1.0
 
 def getPrice(sym):
 	oracle_provider = mango.create_oracle_provider(context, "pyth")
-	sol_oracle = oracle_provider.oracle_for_market(context, market)
-	price = sol_oracle.fetch_price(context)
+	sol_oracle 	= oracle_provider.oracle_for_market(context, market)
+	price 		= sol_oracle.fetch_price(context)
 	print(sym,"Price :",price.mid_price)
 	return price.mid_price
 
@@ -167,11 +168,12 @@ while True:
 			
             # ถ้าเข้าเงื่อนไขให้ทำการเรียก myReBalance
             myReBalance(currentPrice)
-
+	    time.sleep(time_sleep)
+	
     except Exception as e:
         print(e)
         traceback.print_exc()
         #log("Error : "+str(e))
 
     # หน่วงเวลา 60 วินาที
-    time.sleep(60)
+    time.sleep(time_sleep)
