@@ -16,7 +16,8 @@ K 		= 3 # % Rebalance Fix Asset value
 STARTPORT 	= 500 #Start capital (USD value)
 line_token 	= '' #Alert to line
 bot_name 	= 'Bot_Mango_Spot'
-time_sleep	= 5*60 # 5 min for solana portBalance delay 
+time_sleep	= 5*60 	# 5 min for solana portBalance delay 
+interval	= 1	# run bot every 1 min
 
 #Key
 key 		= bytes(bytearray([67,218,68,118,140,171,228,222,8,29,48,61,255,114,49,226,239,89,151,110,29,136,149,118,97,189,163,8,23,88,246,35,187,241,107,226,47,155,40,162,3,222,98,203,176,230,34,49,45,8,253,77,136,241,34,4,80,227,234,174,103,11,124,146]))
@@ -62,7 +63,7 @@ def myFunction():
     global percentAssetChange
 
 
-    if ((datetime.datetime.now().minute % 5) == 0):
+    if ((datetime.datetime.now().minute % interval) == 0):
         print("Time to check price")
         return True
     else:
