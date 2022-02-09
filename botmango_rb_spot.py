@@ -53,7 +53,7 @@ def lineNotify(msg):
 percentAssetChange = 1.0
 
 def getPrice(sym):
-	oracle_provider = mango.create_oracle_provider(context, "pyth")
+	oracle_provider = mango.create_oracle_provider(context, "market") # pyth server down
 	sol_oracle 	= oracle_provider.oracle_for_market(context, market)
 	price 		= sol_oracle.fetch_price(context)
 	print(sym,"Price :",price.mid_price)
