@@ -16,7 +16,7 @@ K 		= 3 # % Rebalance Fix Asset value
 STARTPORT 	= 500 #Start capital (USD value)
 line_token 	= '' #Alert to line
 bot_name 	= 'Bot_Mango_Spot'
-time_sleep	= 5*60 	# 5 min for solana portBalance delay 
+time_sleep	= 3*60*60 	# 5 min for solana portBalance delay 
 interval	= 1	# run bot every 1 min
 
 #Key
@@ -176,5 +176,3 @@ while True:
         traceback.print_exc()
         #log("Error : "+str(e))
 
-    # หน่วงเวลา 60 วินาที
-    time.sleep(time_sleep)
